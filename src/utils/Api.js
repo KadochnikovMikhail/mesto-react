@@ -1,9 +1,8 @@
-import {address, token} from './constants.js';
+import {baseUrl} from './constants.js';
 class Api {
-    constructor(address, token) {
+    constructor(baseUrl) {
 
-        this._address = address
-        this._token = token;
+        this._address = baseUrl;
     }
 
 
@@ -21,7 +20,7 @@ class Api {
         return fetch(`${this._address}/cards`, {
 
             headers: {
-                authorization: this._token
+                authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
             .then((response) => this._handleResponse(response))
@@ -32,7 +31,7 @@ class Api {
         return fetch(`${this._address}/users/me`, {
 
             headers: {
-                authorization: this._token
+                authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
             .then((response) => this._handleResponse(response))
@@ -44,7 +43,7 @@ class Api {
 
             method: 'PATCH',
             headers: {
-                authorization: this._token,
+                authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -63,7 +62,7 @@ class Api {
 
             method: 'POST',
             headers: {
-                authorization: this._token,
+                authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -82,7 +81,7 @@ class Api {
 
             method: 'DELETE',
             headers: {
-                authorization: this._token,
+                authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
             },
         })
@@ -95,7 +94,7 @@ class Api {
 
             method: 'PATCH',
             headers: {
-                authorization: this._token,
+                authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -111,7 +110,7 @@ class Api {
         return fetch(`${this._address}/cards/${id}/likes`, {
             method: isLiked ? 'PUT' : 'DELETE',
             headers: {
-                authorization: this._token,
+                authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
             },
         })
@@ -121,5 +120,5 @@ class Api {
 
 }
 
-    const api = new Api(address, token)
+    const api = new Api(baseUrl)
 export default api;

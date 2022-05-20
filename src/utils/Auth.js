@@ -1,10 +1,10 @@
-import {addressAuth} from "./constants";
+import {baseUrl} from "./constants";
 
 class Auth {
-    constructor(addressAuth) {
+    constructor(baseUrl) {
 
 
-        this._addressAuth = addressAuth;
+        this._addressAuth = baseUrl;
     }
 
     _handleResponse = (res) => {
@@ -49,7 +49,7 @@ class Auth {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
             }
         })
             .then(res => res.json())
@@ -57,5 +57,5 @@ class Auth {
     }
 }
 
-const auth = new Auth(addressAuth)
+const auth = new Auth(baseUrl)
 export default auth;
