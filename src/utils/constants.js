@@ -1,1 +1,1 @@
-export const baseUrl = 'api.mesto.firstproject.nomoredomains.xyz';
+export const baseUrl = 'https://api.mesto.firstproject.nomoredomains.xyz';
